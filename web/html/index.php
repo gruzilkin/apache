@@ -8,9 +8,11 @@ $dsn = "pgsql:dbname={$db_name};host={$db_host}";
 
 $db = new PDO($dsn, $db_user, $db_pass);
 
-$sql = 'SELECT \'ur mom says hi from postgres\'';
+$sql = 'SELECT sender, contents FROM messages';
 
 foreach ($db->query($sql) as $row) {
-  echo $row[0];
+  $sender = $row['sender'];
+  $contents = $row['contents'];
+  echo "$sender says $contents";
 }
 ?>
