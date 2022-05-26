@@ -1,8 +1,21 @@
 version: '3'
 services:
+  db:
+    image: postgres:14
+    environment:
+      - POSTGRES_DB=urmom
+      - POSTGRES_USER=urmom
+      - POSTGRES_PASSWORD=urmom
   php:
-    image: php:8.1-apache
+    build: web
     volumes:
-      - ./html:/var/www/html
+      - ./web/html:/var/www/html
+    environment:
+      - DB_HOST=db
+      - DB_NAME=urmom
+      - DB_USER=urmom
+      - DB_PASS=urmom
     ports:
       - 8080:80
+    depends_on:
+     - db
