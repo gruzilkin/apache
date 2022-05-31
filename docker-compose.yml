@@ -1,5 +1,7 @@
 version: '3'
 services:
+  memcached:
+    image: memcached
   db:
     image: postgres:14
     volumes:
@@ -17,6 +19,7 @@ services:
       - DB_NAME=urmom
       - DB_USER=urmom
       - DB_PASS=urmom
+      - MEMCACHED_HOST=memcached
     ports:
       - 8080:80
     depends_on:
